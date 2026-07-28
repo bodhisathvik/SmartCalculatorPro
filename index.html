@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Smart Calculator Pro</title>
+
+
+<link rel="stylesheet" href="style.css">
+
+
+<link rel="manifest" href="manifest.json">
+
+
+<meta name="theme-color" content="#4f46e5">
+
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<h1>🧮 Smart Calculator Pro</h1>
+
+
+
+<!-- Calculator -->
+
+<div class="calculator">
+
+
+<input id="display" readonly>
+
+
+
+<div class="buttons">
+
+
+<button onclick="playSound();clearDisplay()">C</button>
+
+<button onclick="playSound();deleteChar()">DEL</button>
+
+<button onclick="playSound();append('%')">%</button>
+
+<button onclick="playSound();append('/')">÷</button>
+
+
+
+<button onclick="playSound();append('Math.sqrt(')">√</button>
+
+<button onclick="playSound();append('Math.pow(')">xʸ</button>
+
+<button onclick="playSound();append('Math.PI')">π</button>
+
+<button onclick="playSound();append('(')">(</button>
+
+
+
+<button onclick="playSound();append('7')">7</button>
+
+<button onclick="playSound();append('8')">8</button>
+
+<button onclick="playSound();append('9')">9</button>
+
+<button onclick="playSound();append('*')">×</button>
+
+
+
+<button onclick="playSound();append('4')">4</button>
+
+<button onclick="playSound();append('5')">5</button>
+
+<button onclick="playSound();append('6')">6</button>
+
+<button onclick="playSound();append('-')">−</button>
+
+
+
+<button onclick="playSound();append('1')">1</button>
+
+<button onclick="playSound();append('2')">2</button>
+
+<button onclick="playSound();append('3')">3</button>
+
+<button onclick="playSound();append('+')">+</button>
+
+
+
+<button onclick="playSound();append('0')">0</button>
+
+<button onclick="playSound();append('.')">.</button>
+
+<button onclick="playSound();calculate()">=</button>
+
+<button onclick="playSound();append(')')">)</button>
+
+
+</div>
+
+
+
+<!-- Memory -->
+
+<div class="memory">
+
+<button onclick="memoryAdd()">M+</button>
+
+<button onclick="memorySubtract()">M-</button>
+
+<button onclick="memoryRecall()">MR</button>
+
+<button onclick="memoryClear()">MC</button>
+
+
+</div>
+
+
+
+<button onclick="startVoice()">
+
+🎤 Voice Input
+
+</button>
+
+
+</div>
+
+
+
+
+
+<!-- History -->
+
+<h2>📜 History</h2>
+
+
+<button onclick="clearHistory()">
+
+Clear History
+
+</button>
+
+
+<ul id="history"></ul>
+
+
+
+
+
+<!-- Unit Converter -->
+
+
+<h2>📏 Unit Converter</h2>
+
+
+<div class="converter">
+
+
+<input id="convertValue" placeholder="Enter value">
+
+
+
+<select id="fromUnit">
+
+<option>meter</option>
+
+<option>kilometer</option>
+
+<option>centimeter</option>
+
+<option>gram</option>
+
+<option>kilogram</option>
+
+<option>liter</option>
+
+<option>celsius</option>
+
+<option>fahrenheit</option>
+
+<option>kelvin</option>
+
+
+</select>
+
+
+
+<select id="toUnit">
+
+
+<option>meter</option>
+
+<option>kilometer</option>
+
+<option>centimeter</option>
+
+<option>gram</option>
+
+<option>kilogram</option>
+
+<option>liter</option>
+
+<option>celsius</option>
+
+<option>fahrenheit</option>
+
+<option>kelvin</option>
+
+
+</select>
+
+
+
+<button onclick="convertUnit()">
+
+Convert
+
+</button>
+
+
+
+<h3 id="convertResult"></h3>
+
+
+</div>
+
+
+
+
+
+
+<!-- Currency Converter -->
+
+
+<h2>💱 Currency Converter</h2>
+
+
+<input id="amount" placeholder="Amount">
+
+
+<select id="currencyFrom">
+
+<option>USD</option>
+
+<option>INR</option>
+
+<option>EUR</option>
+
+<option>GBP</option>
+
+<option>JPY</option>
+
+<option>AED</option>
+
+
+</select>
+
+
+
+<select id="currencyTo">
+
+
+<option>INR</option>
+
+<option>USD</option>
+
+<option>EUR</option>
+
+<option>GBP</option>
+
+<option>JPY</option>
+
+<option>AED</option>
+
+
+</select>
+
+
+
+<button onclick="convertCurrency()">
+
+Convert
+
+</button>
+
+
+
+<h3 id="currencyResult"></h3>
+
+
+
+
+
+
+
+<!-- AI Assistant -->
+
+
+<h2>🤖 AI Calculator Assistant</h2>
+
+
+<div class="assistant">
+
+
+<input id="aiQuestion"
+placeholder="Example: 25% of 500">
+
+
+<button onclick="askAI()">
+
+Ask AI
+
+</button>
+
+
+
+<h3 id="aiResult"></h3>
+
+
+</div>
+
+
+
+
+
+
+<!-- Dashboard -->
+
+
+<h2>📊 Dashboard</h2>
+
+
+<div class="dashboard">
+
+
+<div class="card">
+
+<h3 id="totalCalculations">
+0
+</h3>
+
+<p>
+Calculations
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>
+Online
+</h3>
+
+<p>
+Status
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>
+PWA
+</h3>
+
+<p>
+Ready
+</p>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<button onclick="toggleMode()">
+
+🌙 Dark / Light Mode
+
+</button>
+
+
+
+
+</div>
+
+
+
+
+
+
+<script src="script.js"></script>
+
+<script src="converter.js"></script>
+
+<script src="currency.js"></script>
+
+
+
+
+<script>
+
+
+if("serviceWorker" in navigator){
+
+navigator.serviceWorker.register("sw.js");
+
+}
+
+
+</script>
+
+
+
+</body>
+
+</html>
